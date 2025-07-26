@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科学计算器</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div class="calculator">
+            <div class="display">
+                <div class="history" id="history"></div>
+                <div class="input" id="input">0</div>
+            </div>
+
+            <div class="mode-selector">
+                <button id="degreeMode" class="mode-active">DEG</button>
+                <button id="radianMode">RAD</button>
+            </div>
+
+            <div class="tabs">
+                <button class="tab-button active" data-tab="standard">标准</button>
+                <button class="tab-button" data-tab="scientific">科学</button>
+                <button class="tab-button" data-tab="programmer">程序员</button>
+                <button class="tab-button" data-tab="statistics">统计</button>
+            </div>
+
+            <div class="tab-content active" id="standard">
+                <div class="keypad">
+                    <button class="key function" data-action="clear">C</button>
+                    <button class="key function" data-action="backspace"><i class="fas fa-backspace"></i></button>
+                    <button class="key function" data-action="percent">%</button>
+                    <button class="key operator" data-action="divide">÷</button>
+
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key operator" data-action="multiply">×</button>
+
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key operator" data-action="subtract">−</button>
+
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key operator" data-action="add">+</button>
+
+                    <button class="key function" data-action="negate">±</button>
+                    <button class="key number" data-value="0">0</button>
+                    <button class="key number" data-value=".">.</button>
+                    <button class="key equals" data-action="calculate">=</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="scientific">
+                <div class="keypad scientific-keypad">
+                    <button class="key function" data-action="clear">C</button>
+                    <button class="key function" data-action="backspace"><i class="fas fa-backspace"></i></button>
+                    <button class="key function" data-action="percent">%</button>
+                    <button class="key operator" data-action="divide">÷</button>
+
+                    <button class="key function" data-action="sin">sin</button>
+                    <button class="key function" data-action="cos">cos</button>
+                    <button class="key function" data-action="tan">tan</button>
+                    <button class="key operator" data-action="multiply">×</button>
+
+                    <button class="key function" data-action="asin">sin<sup>-1</sup></button>
+                    <button class="key function" data-action="acos">cos<sup>-1</sup></button>
+                    <button class="key function" data-action="atan">tan<sup>-1</sup></button>
+                    <button class="key operator" data-action="subtract">−</button>
+
+                    <button class="key function" data-action="log">log</button>
+                    <button class="key function" data-action="ln">ln</button>
+                    <button class="key function" data-action="exp">e<sup>x</sup></button>
+                    <button class="key operator" data-action="add">+</button>
+
+                    <button class="key function" data-action="pi">π</button>
+                    <button class="key function" data-action="e">e</button>
+                    <button class="key function" data-action="power">x<sup>y</sup></button>
+                    <button class="key function" data-action="sqrt">√</button>
+
+                    <button class="key function" data-action="factorial">x!</button>
+                    <button class="key function" data-action="leftParen">(</button>
+                    <button class="key function" data-action="rightParen">)</button>
+                    <button class="key equals" data-action="calculate">=</button>
+
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key function" data-action="reciprocal">1/x</button>
+
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key function" data-action="cbrt">∛</button>
+
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key function" data-action="abs">|x|</button>
+
+                    <button class="key function" data-action="negate">±</button>
+                    <button class="key number" data-value="0">0</button>
+                    <button class="key number" data-value=".">.</button>
+                    <button class="key function" data-action="mod">mod</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="programmer">
+                <div class="base-selector">
+                    <button class="base-button active" data-base="10">DEC</button>
+                    <button class="base-button" data-base="16">HEX</button>
+                    <button class="base-button" data-base="8">OCT</button>
+                    <button class="base-button" data-base="2">BIN</button>
+                </div>
+                <div class="conversion-display">
+                    <div class="conversion-row">
+                        <span class="conversion-label">HEX:</span>
+                        <span class="conversion-value" id="hexValue">0</span>
+                    </div>
+                    <div class="conversion-row">
+                        <span class="conversion-label">DEC:</span>
+                        <span class="conversion-value" id="decValue">0</span>
+                    </div>
+                    <div class="conversion-row">
+                        <span class="conversion-label">OCT:</span>
+                        <span class="conversion-value" id="octValue">0</span>
+                    </div>
+                    <div class="conversion-row">
+                        <span class="conversion-label">BIN:</span>
+                        <span class="conversion-value" id="binValue">0</span>
+                    </div>
+                </div>
+                <div class="keypad programmer-keypad">
+                    <button class="key function" data-action="clear">C</button>
+                    <button class="key function" data-action="backspace"><i class="fas fa-backspace"></i></button>
+                    <button class="key function" data-action="and">AND</button>
+                    <button class="key function" data-action="or">OR</button>
+
+                    <button class="key hex" data-value="A">A</button>
+                    <button class="key hex" data-value="B">B</button>
+                    <button class="key hex" data-value="C">C</button>
+                    <button class="key function" data-action="xor">XOR</button>
+
+                    <button class="key hex" data-value="D">D</button>
+                    <button class="key hex" data-value="E">E</button>
+                    <button class="key hex" data-value="F">F</button>
+                    <button class="key function" data-action="not">NOT</button>
+
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key function" data-action="leftShift"><<</button>
+
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key function" data-action="rightShift">>></button>
+
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key function" data-action="mod">mod</button>
+
+                    <button class="key function" data-action="convert">CONV</button>
+                    <button class="key number" data-value="0">0</button>
+                    <button class="key equals" data-action="calculate">=</button>
+                </div>
+            </div>
+
+            <div class="tab-content" id="statistics">
+                <div class="statistics-input">
+                    <textarea id="dataInput" placeholder="输入数据，用逗号、空格或换行分隔..."></textarea>
+                    <div class="statistics-buttons">
+                        <button class="stat-button" data-stat="mean">平均值</button>
+                        <button class="stat-button" data-stat="median">中位数</button>
+                        <button class="stat-button" data-stat="mode">众数</button>
+                        <button class="stat-button" data-stat="stdDev">标准差</button>
+                        <button class="stat-button" data-stat="variance">方差</button>
+                        <button class="stat-button" data-stat="sum">求和</button>
+                        <button class="stat-button" data-stat="min">最小值</button>
+                        <button class="stat-button" data-stat="max">最大值</button>
+                        <button class="stat-button" data-stat="range">范围</button>
+                        <button class="stat-button" data-stat="count">计数</button>
+                    </div>
+                </div>
+                <div class="statistics-results">
+                    <div class="result-label">结果:</div>
+                    <div class="result-value" id="statResult">-</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="settings-panel">
+            <h3>设置</h3>
+            <div class="setting">
+                <label for="precisionSetting">小数位数:</label>
+                <input type="number" id="precisionSetting" min="0" max="15" value="10">
+            </div>
+            <div class="setting">
+                <label for="themeSetting">主题:</label>
+                <select id="themeSetting">
+                    <option value="light">浅色</option>
+                    <option value="dark">深色</option>
+                    <option value="blue">蓝色</option>
+                </select>
+            </div>
+            <div class="setting">
+                <label for="historySetting">历史记录:</label>
+                <input type="checkbox" id="historySetting" checked>
+            </div>
+            <button id="clearHistory">清除历史记录</button>
+        </div>
+    </div>
+
+    <script src="js/calculator.js"></script>
+</body>
+</html>
